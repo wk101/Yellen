@@ -1,17 +1,18 @@
 from typing import List
-from strategy.indicators.rsi import RSI
-from strategy.indicators.adx import ADX
-from strategy.signal_calculator import SignalCalculator
-from strategy.position_processor import PositionProcessor
-from strategy.stop_loss import StopLoss
-from metatrader_client import MetaTraderClient
+from strategy.calculators.indicator_rsi import RSICalculator
+from strategy.calculators.indicator_adx import ADXCalculator
+from strategy.calculators.signal_calculator import SignalCalculator
+from strategy.processor.position_processor import PositionProcessor
+from strategy.calculators.stop_loss import StopLoss
+from strategy.calculators.take_profit import TakeProfit
+from client.meta_trader import MetaTraderClient
 
 
 class YellenStrategy:
     def __init__(self) -> None:
-        self.rsi_red: RSI = RSI(period=7)
-        self.rsi_green: RSI = RSI(period=14)
-        self.adx: ADX = ADX()
+        self.rsi_red = RSICalculator(period=7)
+        self.rsi_green = RSICalculator(period=14)
+        self.adx = ADXCalculator()
         self.signal_calculator: SignalCalculator = SignalCalculator()
         self.position_processor: PositionProcessor = PositionProcessor()
         self.stop_loss: StopLoss = StopLoss()
