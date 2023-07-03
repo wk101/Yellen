@@ -2,20 +2,18 @@ from typing import List
 from strategy.calculators.indicator_rsi import RSICalculator
 from strategy.calculators.indicator_adx import ADXCalculator
 from strategy.calculators.signal_calculator import SignalCalculator
-from strategy.processor.position_processor import PositionProcessor
 from strategy.calculators.stop_loss import StopLoss
 from strategy.calculators.take_profit import TakeProfit
+from strategy.processor.signal_processor import SignalProcessor
+from strategy.processor.position_processor import PositionProcessor
+from strategy.processor.order_processor import ProcessOrder
+
 from client.meta_trader import MetaTraderClient
 
 
 class YellenStrategy:
     def __init__(self) -> None:
-        self.rsi_red = RSICalculator(period=7)
-        self.rsi_green = RSICalculator(period=14)
-        self.adx = ADXCalculator()
-        self.signal_calculator: SignalCalculator = SignalCalculator()
-        self.position_processor: PositionProcessor = PositionProcessor()
-        self.stop_loss: StopLoss = StopLoss()
+        pass
 
     def calculate_indicators(self) -> None:
         """
@@ -40,16 +38,14 @@ class YellenStrategy:
             self.rsi_green.value, self.rsi_red.value
         )
 
-    def process_positions(self) -> None:
+    def process_signals(self) -> None:
         """
-        Process and adjust the positions based on the signals.
+        Process the trading signals.
         """
-        self.position_processor.process_positions(self.signal_calculator.signals)
+        if not self.signal_calculator.signals:
+            return
 
-    def process_order(self) -> None:
-        """
-        Process the order for trade execution.
-        """
+        self.position_processor.process_positions(self.signal_calculator.signals)
         self.position_processor.process_order(self.signal_calculator.signals, self.stop_loss)
 
     def on_new_bar(self) -> None:
@@ -58,8 +54,24 @@ class YellenStrategy:
         """
         self.calculate_indicators()
         self.calculate_signals()
-        self.process_positions()
-        self.process_order()
+        self.process_signals()
+
+    def setup(self) -> None:
+        """
+        Perform initial setup, adjusting take profit and stop loss for open positions.
+        """
+        
+        MetaTraderClient.get_ohlcv()
+        self.rsi_red = RSICalculator(period=7)
+        self.rsi_green = RSICalculator(period=14)
+        self.adx = ADXCalculator()
+        self.signal_calculator = SignalCalculator()
+        self.signal_calculator = SignalProcessor()
+        self.position_processor = PositionProcessor()
+        self.stop_loss: StopLoss = StopLoss()
+        self.take_profit: TakeProfit = TakeProfit()
+
+        self.position_processor.adjust_open_positions(self.take_profit, self.stop_loss)
 
     def run_strategy(self) -> None:
         """
@@ -68,8 +80,8 @@ class YellenStrategy:
         # Perform initial setup
         self.calculate_indicators()
         self.calculate_signals()
-        self.process_positions()
-        self.process_order()
+        self.process_signals()
+        self.setup()
 
         # Start monitoring for new bars
         while True:
@@ -78,3 +90,5 @@ class YellenStrategy:
 
             # Perform actions on new bar
             self.on_new_bar()
+
+

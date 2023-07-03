@@ -1,6 +1,6 @@
 import random
 from typing import List, Tuple
-from strategy.position import Position
+from strategy.processor.position_processor import PositionProcessor
 from strategy.yellen_strategy import YellenStrategy
 from strategy.sharpe_ratio_calculator import SharpeRatioCalculator
 from strategy.drawdown_calculator import DrawdownCalculator
