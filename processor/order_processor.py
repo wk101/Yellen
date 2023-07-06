@@ -1,8 +1,8 @@
 from typing import List
-from strategy.processor.signal_processor import SignalProcess
+from processor.signal_processor import SignalProcess
 from strategy.trading_client import TradingClient
-from strategy.calculators.stop_loss import StopLoss
-from strategy.calculators.take_profit import TakeProfit
+from calculators.stop_loss import StopLoss
+from calculators.take_profit import TakeProfit
 
 
 class ProcessOrder:

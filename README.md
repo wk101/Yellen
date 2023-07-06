@@ -120,8 +120,8 @@ A class to calculate the Average Directional Index (ADX) for a given price data 
 Here's an example of how to use the Yellen trading strategy classes in your trading system:
 
 ```python
-from strategy.calculators.take_profit import TakeProfit
-from strategy.calculators.order_size import OrderSize
+from calculators.take_profit import TakeProfit
+from calculators.order_size import OrderSize
 from strategy.calculators.target_price import TargetPrice
 from strategy.indicators.rsi import RSI
 from strategy.indicators.adx import ADX

@@ -1,5 +1,5 @@
-from strategy.calculators.stop_loss import StopLoss
-from strategy.calculators.take_profit import TakeProfit
+from calculators.stop_loss import StopLoss
+from calculators.take_profit import TakeProfit
 from typing import List
 
 
