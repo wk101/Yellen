@@ -5,7 +5,7 @@ from calculators.stop_loss import StopLoss
 from calculators.take_profit import TakeProfit
 
 
-class ProcessOrder:
+class ProcessNewOrder:
     def __init__(self, trading_client: TradingClient):
         self.trading_client = trading_client
         self.signal_processor = SignalProcess()
