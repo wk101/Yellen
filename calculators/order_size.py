@@ -1,35 +1,48 @@
-class OrderSize:
-    def __init__(self, initial_size: float) -> None:
-        self.initial_size: float = initial_size
-        self.current_size: float = initial_size
-        self.scale_factor: float = 1.3
-        self.base_lot_size: int = 100000  # Base lot size
+from typing import List
+from processor.signal_processor import SignalProcess
+from calculators.stop_loss import StopLoss
+from calculators.take_profit import TakeProfit
+from QuantConnect import QCAlgorithm, OrderDirection
+from calculators.order_size import OrderSize
 
-    def reset_size(self) -> None:
-        self.current_size = self.initial_size
 
-    def calculate_size(self, trade_number: int) -> float:
+class ProcessOrder(QCAlgorithm):
+    def __init__(self):
+        self.signal_processor = SignalProcess()
+        self.stop_loss = StopLoss()
+        self.take_profit = TakeProfit()
+        self.order_size = OrderSize(initial_size=1.0)
+
+    def execute_trades(self, adx_green: float, adx_red: float, rsi: float):
         """
-        Calculate the order size for a given trade number.
+        Execute trades based on the ADX green, ADX red, and RSI values.
 
         Args:
-            trade_number (int): The trade number.
-
-        Returns:
-            float: The calculated order size in lots.
+            adx_green (float): The ADX green line value.
+            adx_red (float): The ADX red line value.
+            rsi (float): The RSI value.
         """
+        processed_signal = self.signal_processor.process_indicator(adx_green, adx_red, rsi)
+        order_size = self.order_size.calculate_size()
+        if processed_signal == "Long":
+            sl_level = self.stop_loss.calculate_sl("long")
+            tp_level = self.take_profit.calculate_tp(order_size, self.Securities[self.Symbol].Price, "long")
+            self.MarketOrder(self.Symbol, order_size, stopLoss=sl_level, takeProfit=tp_level)
+        elif processed_signal == "Short":
+            sl_level = self.stop_loss.calculate_sl("short")
+            tp_level = self.take_profit.calculate_tp(order_size, self.Securities[self.Symbol].Price, "short")
+            self.MarketOrder(self.Symbol, -order_size, stopLoss=sl_level, takeProfit=tp_level)
+        else:
+            self.Liquidate()
 
-        if trade_number > 30:
-            self.reset_size()
-            trade_number = 1  # Reset to initial order size after 30 trades
+    def execute_trades_batch(self, adx_green_list: List[float], adx_red_list: List[float], rsi_list: List[float]):
+        """
+        Execute trades in batch based on lists of ADX green, ADX red, and RSI values.
 
-        # Compute size in lots
-        # Apply the scaling factor to the initial size for each trade
-        # Subtracting 1 from trade_number is necessary because trade_number is used as an exponent for the scaling factor.
-        # Since trade_number starts from 1, we subtract 1 to ensure that the first trade (trade_number = 1) applies the scaling factor once.
-        # If we don't subtract 1, the first trade will be multiplied by self.scale_factor ** 1 instead of self.scale_factor ** 0,
-        # resulting in an incorrect scaling factor for subsequent trades.
-        # By subtracting 1, we ensure that the scaling factor is correctly applied for each trade.
-
-        self.current_size = self.initial_size * self.scale_factor ** (trade_number - 1)
-        return self.current_size * self.base_lot_size  # Convert to units of base currency
+        Args:
+            adx_green_list (List[float]): The list of ADX green line values.
+            adx_red_list (List[float]): The list of ADX red line values.
+            rsi_list (List[float]): The list of RSI values.
+        """
+        for adx_green, adx_red, rsi in zip(adx_green_list, adx_red_list, rsi_list):
+            self.execute_trades(adx_green, adx_red, rsi)
