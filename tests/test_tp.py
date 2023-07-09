@@ -1,5 +1,5 @@
 import pytest
-from strategy.calculators.take_profit import TakeProfit
+from calculators.take_profit import TakeProfit
 
 @pytest.fixture(scope="module")
 def tp():

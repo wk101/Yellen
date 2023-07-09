@@ -1,16 +1,17 @@
 from typing import List
-from strategy.processor.signal_processor import SignalProcess
-from strategy.trading_client import TradingClient
-from strategy.calculators.stop_loss import StopLoss
-from strategy.calculators.take_profit import TakeProfit
+from processor.signal_processor import SignalProcess
+from calculators.stop_loss import StopLoss
+from calculators.take_profit import TakeProfit
+from QuantConnect import QCAlgorithm, OrderDirection
+from calculators.order_size import OrderSize
 
 
-class ProcessOrder:
-    def __init__(self, trading_client: TradingClient):
-        self.trading_client = trading_client
+class ProcessOrder(QCAlgorithm):
+    def __init__(self):
         self.signal_processor = SignalProcess()
         self.stop_loss = StopLoss()
         self.take_profit = TakeProfit()
+        self.order_size = OrderSize(initial_size=1.0)
 
     def execute_trades(self, adx_green: float, adx_red: float, rsi: float):
         """
@@ -22,16 +23,17 @@ class ProcessOrder:
             rsi (float): The RSI value.
         """
         processed_signal = self.signal_processor.process_indicator(adx_green, adx_red, rsi)
+        order_size = self.order_size.calculate_size()
         if processed_signal == "Long":
             sl_level = self.stop_loss.calculate_sl("long")
-            tp_level = self.take_profit.calculate_tp(1, self.trading_client.get_current_price(), "long")
-            self.trading_client.create_long_trade(sl_level, tp_level)
+            tp_level = self.take_profit.calculate_tp(order_size, self.Securities[self.Symbol].Price, "long")
+            self.MarketOrder(self.Symbol, order_size, stopLoss=sl_level, takeProfit=tp_level)
         elif processed_signal == "Short":
             sl_level = self.stop_loss.calculate_sl("short")
-            tp_level = self.take_profit.calculate_tp(1, self.trading_client.get_current_price(), "short")
-            self.trading_client.create_short_trade(sl_level, tp_level)
+            tp_level = self.take_profit.calculate_tp(order_size, self.Securities[self.Symbol].Price, "short")
+            self.MarketOrder(self.Symbol, -order_size, stopLoss=sl_level, takeProfit=tp_level)
         else:
-            self.trading_client.close_all_trades()
+            self.Liquidate()
 
     def execute_trades_batch(self, adx_green_list: List[float], adx_red_list: List[float], rsi_list: List[float]):
         """

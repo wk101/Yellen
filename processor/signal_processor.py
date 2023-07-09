@@ -1,4 +1,4 @@
-from strategy.calculators.signal_calculator import SignalCalculator
+from calculators.signal_calculator import SignalCalculator
 
 
 class SignalProcessor:

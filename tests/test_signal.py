@@ -1,5 +1,5 @@
 import pytest
-from strategy.calculators.signal_calculator import SignalCalculator
+from calculators.signal_calculator import SignalCalculator
 
 
 @pytest.mark.parametrize("adx_green, adx_red, rsi, expected_signal", [

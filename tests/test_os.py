@@ -1,5 +1,5 @@
 import pytest
-from strategy.calculators.order_size import OrderSize
+from calculators.order_size import OrderSize
 
 
 @pytest.fixture
