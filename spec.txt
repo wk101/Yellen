@@ -6,6 +6,32 @@ Short:
 1. ADX red line over green on the daily
 2. RSI (9) goes above 70 then back below 70
 
+Martingale entries will have a 1.3x multiple (lot exponent) of the previous trade each time at these intervals:
+1. Trade 1
+2. After .5% of price movement from the first entry, wait for RSI to go above 70 then below 70 for short or below 30 then above 30 for long
+3. After .4% of price movement from the second entry, wait for RSI to go above 70 then below 70 for short or below 30 then above 30 for long
+4. After .35% of price movement from the third entry, wait for RSI to go above 70 then below 70 for short or below 30 then above 30 for long
+5. After .3% of price movement from the fourth entry
+6. After .3% of price movement from the fifth entry
+7. After .25% of price movement from the sixth entry
+8. After .25% of price movement from the seventh entry
+9. After .2% of price movement from the eighth entry
+10. After .2% of price movement from the ninth entry
+11. After .18% of price movement from the tenth entry
+12. After .18% of price movement from the eleventh entry
+13. After .15% of price movement from the twelfth entry
+14. After .15% of price movement from the thirteenth entry
+15. After .12% of price movement from the fourteenth entry
+16. After .12% of price movement from the fifteenth entry
+17. After .1% of price movement from the sixteenth entry
+18. After .1% of price movement from the seventeenth entry
+19. After .08% of price movement from the eightteenth entry
+20. After .08% of price movement from the nineteenth entry
+21. Repeat on the next 5 trades in a row after they move .05% from the previous ones (until trade 25)
+22. Repeat the next 5 trades in a row when they move 0.03% from the previous ones (until trade 30)
+23. —> after trade 30, pause trading for 1 hour, send an email notification to the email that is in the inputs section of the EA notifying the user of a 30 trade limit and pause of trading for 1 hour.
+24. After 1 hour, allow trading again scaling in at the same 1.3x lot exponent every 0.05% price move from the previous entry
+
 TP:
 1 trade it keeps its fixed TP at .2%
 2 trades the TP is 70% between the two (if there are two buys then the TP would be closest to the top trade. If there are two sells then the TP would be closest to the bottom trade).
@@ -40,29 +66,3 @@ TP:
 
 Stop loss:
 Equity stop loss setting adjustment in inputs both for the drawdown in % terms for the entire account balance and also on that one specific pair
-
-Martingale entries will have a 1.3x multiple (lot exponent) of the previous trade each time at these intervals:
-1. Trade 1
-2. After .5% of price movement from the first entry, wait for RSI to go above 70 then below 70 for short or below 30 then above 30 for long
-3. After .4% of price movement from the second entry, wait for RSI to go above 70 then below 70 for short or below 30 then above 30 for long
-4. After .35% of price movement from the third entry, wait for RSI to go above 70 then below 70 for short or below 30 then above 30 for long
-5. After .3% of price movement from the fourth entry
-6. After .3% of price movement from the fifth entry
-7. After .25% of price movement from the sixth entry
-8. After .25% of price movement from the seventh entry
-9. After .2% of price movement from the eighth entry
-10. After .2% of price movement from the ninth entry
-11. After .18% of price movement from the tenth entry
-12. After .18% of price movement from the eleventh entry
-13. After .15% of price movement from the twelfth entry
-14. After .15% of price movement from the thirteenth entry
-15. After .12% of price movement from the fourteenth entry
-16. After .12% of price movement from the fifteenth entry
-17. After .1% of price movement from the sixteenth entry
-18. After .1% of price movement from the seventeenth entry
-19. After .08% of price movement from the eightteenth entry
-20. After .08% of price movement from the nineteenth entry
-21. Repeat on the next 5 trades in a row after they move .05% from the previous ones (until trade 25)
-22. Repeat the next 5 trades in a row when they move 0.03% from the previous ones (until trade 30)
-23. —> after trade 30, pause trading for 1 hour, send an email notification to the email that is in the inputs section of the EA notifying the user of a 30 trade limit and pause of trading for 1 hour.
-24. After 1 hour, allow trading again scaling in at the same 1.3x lot exponent every 0.05% price move from the previous entry
