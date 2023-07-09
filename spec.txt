@@ -1,31 +1,3 @@
-class YellenStrategy:
-
-    def
-
-    def calculate_indicators(self):
-        RSI class goes here
-        red RSI 7
-        green RSI 14
-        ADX class goes here
-
-    def calculate_signals(self):
-        Calc singla class goes here
-
-    def process signals(self):
-        process singals goes here
-
-    def process positions
-
-    def process order(self):
-        this takes the proces singla and uses the process order class
-
-
-        Stop loss class goes here
-
-
-With the
-
-
 
 Long:
 
@@ -49,7 +21,6 @@ If there is more than one entry the TP dynamically changes based on MA, vwap or 
 
 Stop loss:
 Equity stop loss setting adjustment in inputs both for the drawdown in % terms for the entire account balance and also on that one specific pair
-
 
 
 Martingale entries will have a 1.3x multiple (lot exponent) of the previous trade each time at these intervals:
@@ -79,9 +50,7 @@ Martingale entries will have a 1.3x multiple (lot exponent) of the previous trad
 24. After 1 hour, allow trading again scaling in at the same 1.3x lot exponent every 0.05% price move from the previous entry
 
 
-
 TP
-
 
 
 1 trade it keeps its fixed TP at .2%
