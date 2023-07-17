@@ -10,13 +10,41 @@
 # Quant Connect Yellen Trading Strategy
 
 
-This document outlines the specific rules for implementing the Yellen trading strategy. This strategy is designed for both long and short positions, using the ADX (Average Directional Index) and RSI (Relative Strength Index) as key indicators.
+The Yellen Trading Strategy is a trend-following forex trading strategy that aims to identify potential long trading opportunities in the GBP/USD currency pair. The strategy utilizes a combination of technical indicators, including the Relative Strength Index (RSI) and the Average Directional Index (ADX), to generate trading signals.
 
-### Backtest Yellen Trading Strategy
+**Strategy Overview:**
 
-**Yellen Trading Strategy Backtesting Readme for QuantConnect**
+1. **Indicators:**
+   - Relative Strength Index (RSI): The RSI is a momentum oscillator that measures the speed and change of price movements. It oscillates between 0 and 100, where values above 70 indicate overbought conditions, and values below 30 indicate oversold conditions.
+   - Average Directional Index (ADX): The ADX is a trend strength indicator that ranges from 0 to 100. High ADX values indicate a strong trend, while low values suggest a weak or ranging market.
 
-This README provides a comprehensive guide on backtesting the Yellen Trading Strategy using the QuantConnect platform. The Yellen Trading Strategy aims to identify potential long trading opportunities in the GBP/USD forex pair based on a combination of the RSI (Relative Strength Index) and ADX (Average Directional Index) indicators. Please remember that this strategy is purely for educational purposes and does not constitute financial advice. Always exercise caution and conduct thorough research before deploying any trading strategy in real markets.
+2. **Signal Generation:**
+   - The strategy uses the `SignalRules` class to evaluate the values of RSI and ADX and other conditions to determine potential long trading signals.
+   - A long trading signal is generated when specific criteria are met, indicating a potential upward price movement and the presence of a strong trend.
+
+3. **Signal Confirmation:**
+   - To avoid overtrading and manage risk, the `SignalProcessor` class is employed to process the long trading signals.
+   - The `SignalProcessor` considers the current trade count and recent price movement to decide whether to confirm or filter out the long signal.
+   - This component helps enhance the strategy by focusing on higher-probability trading opportunities and reducing unnecessary trades.
+
+4. **Order Sizing:**
+   - The `OrderSize` class calculates the appropriate position size for each long trade based on the current trade count and the lot size of the GBP/USD forex pair.
+   - Proper position sizing is essential for effective risk management, and this class ensures that trade sizes are adjusted according to the strategy's progress.
+
+5. **Take Profit and Stop Loss:**
+   - The `TakeProfit` class determines the take profit price for each long trade.
+   - The strategy aims to capture profits when certain conditions are met, closing winning trades at favorable price levels.
+   - The `StopLoss` class, while not included in the provided code, would determine the stop loss price for each long trade to limit potential losses if the market moves against the position.
+
+6. **Trading Frequency Control:**
+   - The `TimeFrameChecker` class helps control the frequency of trades by imposing a one-hour pause after each long trade execution.
+   - This mechanism prevents consecutive trades within a short time frame, providing a cooldown period before considering new opportunities.
+
+## Backtest Yellen Trading Strategy
+
+This provides a comprehensive guide on backtesting the Yellen Trading Strategy using the QuantConnect platform. The Yellen Trading Strategy aims to identify potential long trading opportunities in the GBP/USD forex pair based on a combination of the RSI (Relative Strength Index) and ADX (Average Directional Index) indicators. Please remember that this strategy is purely for educational purposes and does not constitute financial advice. Always exercise caution and conduct thorough research before deploying any trading strategy in real markets.
+
+![image](https://github.com/wk101/yellen/assets/106099024/42b278be-477e-4e81-b49b-f4a4b343173c)
 
 ### QuantConnect Strategy Overview
 
@@ -57,9 +85,6 @@ The Yellen Trading Strategy is implemented as a custom algorithm using the Quant
 ### Risk and Caution
 
 It's crucial to recognize that backtesting results may not accurately reflect future performance. Real-world trading involves numerous unpredictable factors and risks. Always consider risk management practices, such as stop-loss and position sizing, and thoroughly test the strategy under various market conditions before deploying it in live markets.
-
-![image](https://github.com/wk101/yellen/assets/106099024/42b278be-477e-4e81-b49b-f4a4b343173c)
-
 
 ### Long Entry Rules:
 ADX Indicator: The green line (also known as the Positive Directional Movement Indicator or +DMI) must be above the red line (Negative Directional Movement Indicator or -DMI) on the daily chart. This suggests that there is a strong upward trend.
