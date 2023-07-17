@@ -14,6 +14,50 @@ This document outlines the specific rules for implementing the Yellen trading st
 
 ### Backtest Yellen Trading Strategy
 
+**Yellen Trading Strategy Backtesting Readme for QuantConnect**
+
+This README provides a comprehensive guide on backtesting the Yellen Trading Strategy using the QuantConnect platform. The Yellen Trading Strategy aims to identify potential long trading opportunities in the GBP/USD forex pair based on a combination of the RSI (Relative Strength Index) and ADX (Average Directional Index) indicators. Please remember that this strategy is purely for educational purposes and does not constitute financial advice. Always exercise caution and conduct thorough research before deploying any trading strategy in real markets.
+
+### QuantConnect Strategy Overview
+
+The Yellen Trading Strategy is implemented as a custom algorithm using the QuantConnect platform. The strategy utilizes various components to process signals, determine order sizes, set take profit levels, and manage stop-loss rules. Below is an overview of the key components used in the strategy:
+
+1. **SignalRules**: This component evaluates trading signals based on the RSI, ADX, and other conditions to determine if a long trade should be initiated.
+
+2. **SignalProcessor**: The SignalProcessor component further processes long trading signals based on the current trade count and price movement, helping to manage risk and avoid overtrading.
+
+3. **OrderSize**: The OrderSize component calculates the appropriate position size for each trade based on the current trade count and the lot size of the forex pair.
+
+4. **TakeProfit**: This component determines the take profit price for each long trade, aiming to capture profits when certain conditions are met.
+
+5. **StopLoss**: While not present in the provided code, you can add a StopLoss component to manage the risk of each trade, ensuring losses are limited if the market moves against the position.
+
+6. **TimeFrameChecker**: The TimeFrameChecker component ensures that trading is paused for one hour after each long trade execution, helping to manage frequency and avoid consecutive trades.
+
+### Backtesting Steps on QuantConnect
+
+1. **Create a QuantConnect Account**: If you don't have one, sign up for a free QuantConnect account at https://www.quantconnect.com/.
+
+2. **Access the IDE**: Log in to your QuantConnect account and access the QuantConnect Integrated Development Environment (IDE).
+
+3. **Create a New Algorithm**: In the IDE, click on the "New Algorithm" button to create a new algorithm.
+
+4. **Implement the Strategy**: In the code editor, paste the provided code from the Yellen Trading Strategy implementation.
+
+5. **Set Strategy Parameters**: Review and set the desired start and end dates for the backtest using `SetStartDate` and `SetEndDate` methods. Define the initial cash balance with `SetCash`.
+
+6. **Add Missing Components**: If the StopLoss component or any other necessary parts are not included in the provided code, implement them based on your risk management preferences.
+
+7. **Run the Backtest**: Click on the "Backtest" button to start the backtesting process. The QuantConnect platform will use historical data to execute the strategy and generate performance metrics.
+
+8. **Analyze Results**: Once the backtest is complete, carefully analyze the backtesting results, including performance metrics, charts, and insights. Pay attention to drawdowns, win rates, and other risk-related metrics.
+
+9. **Optimization (Optional)**: Depending on the results, you can perform parameter optimization, adjust strategy components, or try different variations to enhance performance. Remember to avoid overfitting and validate results across various market conditions.
+
+### Risk and Caution
+
+It's crucial to recognize that backtesting results may not accurately reflect future performance. Real-world trading involves numerous unpredictable factors and risks. Always consider risk management practices, such as stop-loss and position sizing, and thoroughly test the strategy under various market conditions before deploying it in live markets.
+
 ![image](https://github.com/wk101/yellen/assets/106099024/42b278be-477e-4e81-b49b-f4a4b343173c)
 
 
