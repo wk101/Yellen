@@ -7,9 +7,12 @@
             alt="coverage"></a>
 </p>
 
-# Yellen Trading Strategy
+# Quant Connect Yellen Trading Strategy
 
 This document outlines the specific rules for implementing the Yellen trading strategy. This strategy is designed for both long and short positions, using the ADX (Average Directional Index) and RSI (Relative Strength Index) as key indicators.
+
+![image](https://github.com/wk101/yellen/assets/106099024/172ea156-a80f-40d7-a258-4f3d8cb13766)
+
 
 ### Long Entry Rules:
 ADX Indicator: The green line (also known as the Positive Directional Movement Indicator or +DMI) must be above the red line (Negative Directional Movement Indicator or -DMI) on the daily chart. This suggests that there is a strong upward trend.
