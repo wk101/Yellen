@@ -66,3 +66,5 @@ TP:
 
 Stop loss:
 Equity stop loss setting adjustment in inputs both for the drawdown in % terms for the entire account balance and also on that one specific pair
+
+New Stop Loss trailing stop loss .1% on RSI levels
