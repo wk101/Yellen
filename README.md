@@ -9,12 +9,13 @@
 
 # Quant Connect Yellen Trading Strategy
 
-# Backtest Yellen
+
+This document outlines the specific rules for implementing the Yellen trading strategy. This strategy is designed for both long and short positions, using the ADX (Average Directional Index) and RSI (Relative Strength Index) as key indicators.
+
+### Backtest Yellen Trading Strategy
 
 ![image](https://github.com/wk101/yellen/assets/106099024/42b278be-477e-4e81-b49b-f4a4b343173c)
 
-
-This document outlines the specific rules for implementing the Yellen trading strategy. This strategy is designed for both long and short positions, using the ADX (Average Directional Index) and RSI (Relative Strength Index) as key indicators.
 
 ### Long Entry Rules:
 ADX Indicator: The green line (also known as the Positive Directional Movement Indicator or +DMI) must be above the red line (Negative Directional Movement Indicator or -DMI) on the daily chart. This suggests that there is a strong upward trend.
