@@ -1,7 +1,5 @@
 
-
 [![CI](https://github.com/wk101/yellen/actions/workflows/ci.yml/badge.svg)](https://github.com/wk101/yellen/actions/workflows/ci.yml)
-
 
 # Quant Connect Yellen Trading Strategy
 
