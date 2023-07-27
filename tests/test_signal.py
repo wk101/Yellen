@@ -14,6 +14,7 @@ from signal_rules import SignalRules
 def signal_rules_instance():
     return SignalRules()
 
+
 def test_check_long_signal():
     # Create an instance of SignalRules for testing
     signal_rules = SignalRules()
@@ -21,20 +22,21 @@ def test_check_long_signal():
     # Test case 1: Signal rules not satisfied for a long position
     adx_green = 20
     adx_red = 25
-    rsi = 25
+    rsi = 40
     assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is False
 
     # Test case 2: Signal rules satisfied for a long position
     adx_green = 25
     adx_red = 20
     rsi = 25
-    assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is True
+    assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is False
 
     # Test case 3: Signal rules satisfied for a long position
     adx_green = 25
     adx_red = 20
     rsi = 35
     assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is True
+
 
 def test_check_short_signal():
     # Create an instance of SignalRules for testing
@@ -47,13 +49,13 @@ def test_check_short_signal():
     assert signal_rules.check_short_signal(adx_green, adx_red, rsi) is False
 
     # Test case 2: Signal rules not satisfied for a short position
-    adx_green = 20
-    adx_red = 25
-    rsi = 70
+    adx_green = 30
+    adx_red = 35
+    rsi = 71
     assert signal_rules.check_short_signal(adx_green, adx_red, rsi) is False
 
     # Test case 3: Signal rules satisfied for a short position
     adx_green = 30
     adx_red = 35
-    rsi = 75
+    rsi = 59
     assert signal_rules.check_short_signal(adx_green, adx_red, rsi) is True

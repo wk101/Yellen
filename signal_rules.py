@@ -49,13 +49,15 @@ class SignalRules:
         """
         is_result_short = False
         self.adx_red_over_green = adx_red > adx_green
+        if self.rsi_above_70:
+            self.rsi_below_70 = rsi < 70
+            is_result_short = self.adx_red_over_green and self.rsi_above_70 and self.rsi_below_70
+
         self.rsi_above_70 = rsi > 70
-        self.rsi_below_70 = rsi < 70
-        
-        if self.adx_red_over_green and self.rsi_above_70 and self.rsi_below_70:
-            is_result_short = True
+
+        if is_result_short:
             self.reset()
-        
+
         return is_result_short
 
     def reset(self):
