@@ -1,5 +1,5 @@
 import pytest
-from your_module import OrderSize
+from yellen.order_size import OrderSize
 
 @pytest.fixture
 def order_size_instance():
