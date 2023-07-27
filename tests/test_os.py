@@ -1,6 +1,13 @@
 import pytest
 from order_size import OrderSize
 
+# Get the parent directory of the current script (assuming both files are in the same parent directory)
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Add the parent directory to the Python path
+sys.path.append(parent_dir)
+
+
 @pytest.fixture
 def order_size_instance():
     # Create an instance of OrderSize for testing
