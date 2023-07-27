@@ -18,8 +18,8 @@ def signal_rules_instance():
 
 @pytest.mark.parametrize("adx_green, adx_red, rsi, expected_result", [
     # Test cases for check_long_signal method
-    (20, 15, 35, False),  # Signal rules not satisfied
-    (25, 20, 25, True),   # Signal rules satisfied
+    (20, 15, 15, False),  # Signal rules not satisfied
+    (25, 20, 35, True),   # Signal rules satisfied
     # Add more test cases as needed
 ])
 def test_check_long_signal(signal_rules_instance, adx_green, adx_red, rsi, expected_result):
