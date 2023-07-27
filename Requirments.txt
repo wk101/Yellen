@@ -1,0 +1,5 @@
+quantconnect==3.5.0
+websocket-client==0.57.0
+pandas==1.3.3
+numpy==1.21.2
+matplotlib==3.4.3
