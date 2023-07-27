@@ -25,11 +25,13 @@ class Yellen(QCAlgorithm):
         self.short_last_trade_price = 0.0
         self.short = False
 
-        self.SetStartDate(2021, 1, 1)  # Set Start Date
-        self.SetCash(1000000)  # Set Strategy Cash
-        self.symbol = self.AddForex("GBPJPY", Resolution.Minute, Market.Oanda).Symbol
+        self.SetStartDate(2020, 1, 1)  # Set Start Date
+        self.SetStartDate(2022, 12, 1)  # Set Start Date
+        
+        self.SetCash(10000)  # Set Strategy Cash
+        self.symbol = self.AddForex("USDCHF", Resolution.Minute, Market.Oanda).Symbol
         self.SetBrokerageModel(BrokerageName.OandaBrokerage)
-        self.Consolidate(self.symbol, timedelta(minutes=5), self.OnDataConsolidated)
+        self.Consolidate(self.symbol, timedelta(minutes=15), self.OnDataConsolidated)
 
         # Add signal component
         self.signal_rules = SignalRules()
@@ -41,9 +43,8 @@ class Yellen(QCAlgorithm):
         self.time_frame_checker = TimeFrameChecker()
 
         # Add order size component
-        self.order_size = OrderSize(initial_size=1000, _lot_size=self.Securities["GBPJPY"].SymbolProperties.LotSize)
-
-        # Add take_profit component
+        self.order_size = OrderSize(initial_size=100, _lot_size=self.Securities["USDCHF"].SymbolProperties.LotSize)
+        # Add take_profit componen
         self.take_profit_rules = TakeProfit()
 
         # Add stop loss component
