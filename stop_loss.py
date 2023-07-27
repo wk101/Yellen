@@ -1,7 +1,4 @@
 #region imports
-from AlgorithmImports import *
-#endregion
-from QuantConnect import *
 
 
 class StopLoss:
