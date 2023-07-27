@@ -1,3 +1,8 @@
+#region imports
+from AlgorithmImports import *
+#endregion
+from AlgorithmImports import *
+from QuantConnect import *
 class StopLoss:
     def __init__(self):
         pass
@@ -18,17 +23,13 @@ class StopLoss:
             if rsi > 65:
                 # Set the stop loss level for long position as 0.1% below the entry price
                 new_stop_loss = entry_price - (entry_price * 0.001)
-                print(f"Trailing stop loss adjusted for LONG position. New level: {new_stop_loss:.2f}")
             else:
                 new_stop_loss = 0
-                print("RSI is not above 65. No change in stop loss for LONG position.")
         else:
-            if rsi < 35:
+            if rsi< 35:
                 # Set the stop loss level for short position as 0.1% above the entry price
                 new_stop_loss = entry_price + (entry_price * 0.001)
-                print(f"Trailing stop loss adjusted for SHORT position. New level: {new_stop_loss:.2f}")
             else:
                 new_stop_loss = 0
-                print("RSI is not below 35. No change in stop loss for SHORT position.")
 
         return new_stop_loss
