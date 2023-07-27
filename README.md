@@ -96,3 +96,56 @@ ADX Indicator: The red line (-DMI) must be above the green line (+DMI) on the da
 
 RSI Indicator: The RSI (9) goes above 70 (indicating overbought conditions) and then falls back below 70. This suggests that the price might be reversing from an upward trend to a downward trend.
 
+
+Certainly! Based on your preference, I've created a README section focused on running tests with `pytest`. Here's the updated README content:
+
+## Running Tests with pytest
+
+`pytest` is a popular testing framework in the Python ecosystem that allows you to write and run unit tests for your code. To ensure that the Yellen Trading Strategy functions as expected and remains robust, running tests can be beneficial. Follow the steps below to run tests using `pytest`:
+
+### Prerequisites
+
+Before running tests, ensure you have the necessary dependencies installed. You can install them using `pip`:
+
+```bash
+pip install pytest
+```
+
+### Test Files
+
+All test files are stored in the `tests` directory. Each test file contains test functions that verify specific components of the Yellen Trading Strategy. For example:
+
+```
+project/
+    ├── main.py
+    └── tests/
+        ├── test_signal_rules.py      # Test cases for the SignalRules component.
+        ├── test_order_size.py        # Test cases for the OrderSize component.
+        └── ... (other test files)
+```
+
+### Running Tests
+
+1. Open a terminal or command prompt.
+
+2. Navigate to the root directory of your project.
+
+3. Run `pytest` to execute the tests:
+
+```bash
+pytest
+```
+
+`pytest` will automatically discover and run all the test functions in the test files within the `tests` directory. The output will indicate which tests pass, which fail, and any errors encountered.
+
+### Review Test Results
+
+After running the tests, review the test results in the terminal or command prompt. If all tests pass, it indicates that the components of the Yellen Trading Strategy are functioning correctly as per the defined test cases.
+
+If any tests fail, carefully investigate the cause of the failures and make necessary adjustments to the strategy code.
+
+### Test Driven Development (TDD) (Optional)
+
+For a more proactive approach to development, you can consider Test Driven Development (TDD). In TDD, you write the tests first before implementing the actual code. The idea is to write tests for the behavior you expect from your code, and then write the code to make the tests pass. This iterative process helps ensure that your code is thoroughly tested and meets the desired specifications.
+
+By running tests with `pytest`, you can gain confidence in the correctness of your trading strategy's components and ensure that any changes or updates to the code do not introduce unintended issues. Remember to update and add new tests as you enhance the strategy or introduce new features.
