@@ -1,5 +1,4 @@
 #region imports
-from AlgorithmImports import *
 #endregion
 class OrderSize:
     def __init__(self, initial_size: float, _lot_size: float = 100000 ) -> None:
