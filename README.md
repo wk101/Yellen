@@ -1,11 +1,7 @@
 
-<p align="left">
-<a href="https://circleci.com/gh/badges/shields/tree/master">
-        <img src="https://img.shields.io/circleci/project/github/badges/shields/master" alt="build status"></a>
-    <a href="https://coveralls.io/github/badges/shields">
-        <img src="https://img.shields.io/coveralls/github/badges/shields"
-            alt="coverage"></a>
-</p>
+
+[![CI](https://github.com/wk101/yellen/actions/workflows/ci.yml/badge.svg)](https://github.com/wk101/yellen/actions/workflows/ci.yml)
+
 
 # Quant Connect Yellen Trading Strategy
 
