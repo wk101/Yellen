@@ -1,5 +1,5 @@
 import pytest
-from yellen.signal_rules import SignalRules
+from signal_rules import SignalRules
 
 @pytest.fixture
 def signal_rules_instance():

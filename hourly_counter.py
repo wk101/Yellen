@@ -2,6 +2,7 @@
 from AlgorithmImports import *
 #endregion
 
+
 class TimeFrameChecker:
     def __init__(self):
         self.counter = 0
