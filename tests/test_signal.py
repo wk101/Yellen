@@ -10,10 +10,6 @@ sys.path.append(parent_dir)
 import pytest
 from signal_rules import SignalRules
 
-
-import pytest
-from signal_rules import SignalRules
-
 @pytest.fixture
 def signal_rules_instance():
     return SignalRules()
