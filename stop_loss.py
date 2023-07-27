@@ -1,8 +1,9 @@
 #region imports
 from AlgorithmImports import *
 #endregion
-from AlgorithmImports import *
 from QuantConnect import *
+
+
 class StopLoss:
     def __init__(self):
         pass
