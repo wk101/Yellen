@@ -1,5 +1,5 @@
 import pytest
-from stop_loss import StopLoss
+from yellen.stop_loss import StopLoss
 
 @pytest.fixture
 def stop_loss_instance():
