@@ -1,5 +1,4 @@
 #region Imports
-from AlgorithmImports import *
 #endregion
 
 class SignalRules:
