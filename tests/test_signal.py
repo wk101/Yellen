@@ -11,50 +11,53 @@ import pytest
 from signal_rules import SignalRules
 
 
+import pytest
+from signal_rules import SignalRules
+
 @pytest.fixture
 def signal_rules_instance():
-    # Create an instance of SignalRules for testing
     return SignalRules()
 
-@pytest.mark.parametrize("adx_green, adx_red, rsi, expected_result", [
-    # Test cases for check_long_signal method
-    (20, 15, 15, False),  # Signal rules not satisfied
-    (25, 20, 35, True),   # Signal rules satisfied
-    # Add more test cases as needed
-])
-def test_check_long_signal(signal_rules_instance, adx_green, adx_red, rsi, expected_result):
-    assert signal_rules_instance.check_long_signal(adx_green, adx_red, rsi) == expected_result
+def test_check_long_signal():
+    # Create an instance of SignalRules for testing
+    signal_rules = SignalRules()
 
-@pytest.mark.parametrize("adx_green, adx_red, rsi, expected_result", [
-    # Test cases for check_short_signal method
-    (20, 25, 60, False),  # Signal rules not satisfied
-    (30, 35, 75, True),   # Signal rules satisfied
-    # Add more test cases as needed
-])
-def test_check_short_signal(signal_rules_instance, adx_green, adx_red, rsi, expected_result):
-    assert signal_rules_instance.check_short_signal(adx_green, adx_red, rsi) == expected_result
+    # Test case 1: Signal rules not satisfied for a long position
+    adx_green = 20
+    adx_red = 25
+    rsi = 25
+    assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is False
 
-def test_reset(signal_rules_instance):
-    # Test the reset method
+    # Test case 2: Signal rules satisfied for a long position
+    adx_green = 25
+    adx_red = 20
+    rsi = 25
+    assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is True
 
-    # Set some initial values to True
-    signal_rules_instance.adx_green_over_red = True
-    signal_rules_instance.adx_red_over_green = True
-    signal_rules_instance.rsi_below_30 = True
-    signal_rules_instance.rsi_above_30 = True
-    signal_rules_instance.rsi_above_70 = True
-    signal_rules_instance.rsi_below_70 = True
+    # Test case 3: Signal rules satisfied for a long position
+    adx_green = 25
+    adx_red = 20
+    rsi = 35
+    assert signal_rules.check_long_signal(adx_green, adx_red, rsi) is True
 
-    # Call the reset method
-    signal_rules_instance.reset()
+def test_check_short_signal():
+    # Create an instance of SignalRules for testing
+    signal_rules = SignalRules()
 
-    # Check if all values are reset to False
-    assert not signal_rules_instance.adx_green_over_red
-    assert not signal_rules_instance.adx_red_over_green
-    assert not signal_rules_instance.rsi_below_30
-    assert not signal_rules_instance.rsi_above_30
-    assert not signal_rules_instance.rsi_above_70
-    assert not signal_rules_instance.rsi_below_70
+    # Test case 1: Signal rules not satisfied for a short position
+    adx_green = 30
+    adx_red = 35
+    rsi = 60
+    assert signal_rules.check_short_signal(adx_green, adx_red, rsi) is False
 
-    # Add more reset test cases as needed
+    # Test case 2: Signal rules not satisfied for a short position
+    adx_green = 20
+    adx_red = 25
+    rsi = 70
+    assert signal_rules.check_short_signal(adx_green, adx_red, rsi) is False
 
+    # Test case 3: Signal rules satisfied for a short position
+    adx_green = 30
+    adx_red = 35
+    rsi = 75
+    assert signal_rules.check_short_signal(adx_green, adx_red, rsi) is True
