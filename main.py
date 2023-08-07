@@ -26,7 +26,7 @@ class Yellen(QCAlgorithm):
         self.short = False
 
         self.SetStartDate(2020, 1, 1)  # Set Start Date
-        self.SetStartDate(2022, 12, 1)  # Set Start Date
+        self.SetEndDate(2022, 12, 1)  # Set End Date
         
         self.SetCash(1000000)  # Set Strategy Cash
         self.symbol = self.AddForex("EURGBP", Resolution.Minute, Market.Oanda, leverage=1).Symbol
