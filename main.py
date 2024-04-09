@@ -11,7 +11,7 @@ from hourly_counter import TimeFrameChecker
 class Yellen(QCAlgorithm):
 
     def Initialize(self):
-        self.Debug(f'Yellen started!!!')
+        self.Debug('Yellen started!!!')
         self.long_stop_loss = 0.0
         self.long_take_profit = 0.0
         self.long_trade_count = 0
