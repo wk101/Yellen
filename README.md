@@ -1,7 +1,7 @@
 
 [![CI](https://github.com/wk101/yellen/actions/workflows/ci.yml/badge.svg)](https://github.com/wk101/yellen/actions/workflows/ci.yml)
 
-# Quant Connect Yellen Trading Strategy
+# Demo Quant Connect Yellen Trading Strategy
 
 
 The Yellen Trading Strategy is a trend-following forex trading strategy that aims to identify potential long trading opportunities in the GBP/USD currency pair. The strategy utilizes a combination of technical indicators, including the Relative Strength Index (RSI) and the Average Directional Index (ADX), to generate trading signals.
